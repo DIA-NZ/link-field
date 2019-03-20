@@ -74,7 +74,7 @@ class WTLinkField extends TextField {
          * @return string
          */
         function Field($properties = array()) {
-                Requirements::javascript('resources/vendor/dia-nz/link-field/javascript/WTLinkField.js');
+                Requirements::javascript('resources/link-field/javascript/WTLinkField.js');
                 return "<div class=\"fieldgroup\">" .
                         "<div class=\"fieldgroupField\">" . $this->fieldType->FieldHolder() . "</div>" .
                         "<div class=\"fieldgroupField\">" . $this->fieldLink->FieldHolder() . "</div>" .
