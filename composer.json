@@ -1,5 +1,5 @@
 {
-	"name": "DIA-NZ/link-field",
+	"name": "dia-nz/link-field",
 	"type": "silverstripe-module",
 	"description": "A field for adding links",
 	"license": "BSD-3-Clause",
