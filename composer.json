@@ -1,31 +1,40 @@
 {
-	"name": "dia-nz/link-field",
-	"type": "silverstripe-module",
-	"description": "A field for adding links",
-	"license": "BSD-3-Clause",
-	"keywords": ["silverstripe", "link field"],
-        "authors": [
-                {
-                        "name": "Davis Dimalen",
-                        "email": "davis.dimalen@gmail.com",
-            		"role": "Developer"
-                },
-                {
-                        "name": "Conrad Dobbs",
-                        "email": "conrad@webtorque.co.nz",
-            		"role": "Developer"
-                }                
-	],
-	"extra": {
-		"expose": [
-			"javascript"
-		]
-	},
-	"require":
-	{
-		"php": ">=7.1",
-		"silverstripe/framework": "4.*",
-		"silverstripe/cms": "4.*"
-	},
-	"minimum-stability": "dev"
+        "name": "dia-nz/link-field",
+        "type": "silverstripe-vendormodule",
+        "description": "A field for adding links",
+        "license": "BSD-3-Clause",
+        "keywords": ["silverstripe", "link field"],
+        "authors": [{
+                "name": "Davis Dimalen",
+                "email": "davis.dimalen@gmail.com",
+                "role": "Developer"
+        }, {
+                "name": "Conrad Dobbs",
+                "email": "conrad@webtorque.co.nz",
+                "role": "Developer"
+        }],
+        "extra": {
+                "expose": [
+                        "javascript"
+                ]
+        },
+        "scripts": {
+
+        },
+        "require": {
+                "php": ">=7.1",
+                "silverstripe/framework": "4.*",
+                "silverstripe/cms": "4.*"
+        },
+        "require-dev": {
+                "phpunit/phpunit": "^5.7",
+                "squizlabs/php_codesniffer": "^3.4"
+        },
+        "scripts": {
+                "remove-uses": "php-cs-fixer fix src/ --rules=no_unused_imports",
+                "lint": "phpcs --extensions=php src/",
+                "syntax-check": "find src/",
+                "lint-clean": "phpcbf src/"
+        },
+        "minimum-stability": "dev"
 }
