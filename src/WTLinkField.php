@@ -1,5 +1,7 @@
 <?php
 
+namespace Dia\SilverStripe\LinkField;
+
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\EmailField;

@@ -1,4 +1,7 @@
 <?php
+
+namespace Dia\SilverStripe\LinkField;
+
 /**
  * Extends Tree Dropdown Field {@Link TreeDropdownField} so it works as a subfield of another field
  * Class WTTreeDropdownField

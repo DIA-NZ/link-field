@@ -18,8 +18,10 @@
                         "javascript"
                 ]
         },
-        "scripts": {
-
+        "autoload": {
+                "psr-4": {
+                        "Dia\\SilverStripe\\LinkField\\": "src"
+                }
         },
         "require": {
                 "php": ">=7.1",
