@@ -5,7 +5,7 @@
         "license": "BSD-3-Clause",
         "keywords": ["silverstripe", "link field"],
         "authors": [{
-                "name": "Davis Dimalen",
+                 "name": "Davis Dimalen",
                 "email": "davis.dimalen@gmail.com",
                 "role": "Developer"
         }, {

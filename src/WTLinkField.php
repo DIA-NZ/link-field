@@ -10,6 +10,7 @@ use SilverStripe\Forms\CompositeField;
 use SilverStripe\View\Requirements;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\ORM\DataObjectInterface;
 use SilverStripe\ORM\FieldType\DBComposite;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Assets\File;
@@ -17,14 +18,14 @@ use SilverStripe\Assets\File;
 class WTLinkField extends TextField
 {
     private static $url_handlers = [
-                '$Action!/$ID' => '$Action'
-        ];
+        '$Action!/$ID' => '$Action'
+    ];
 
     private static $allowed_actions = [
-                'tree',
-                'InternalTree',
-                'FileTree'
-        ];
+        'tree',
+        'InternalTree',
+        'FileTree'
+    ];
 
     protected $fieldField = null;
     
@@ -40,31 +41,31 @@ class WTLinkField extends TextField
     
     protected $targetBlankField = null;
 
-        /**
-         * @var FormField
-         */
+    /**
+     * @var FormField
+     */
     protected $fieldType = null;
 
-        /**
-         * @var FormField
-         */
+    /**
+     * @var FormField
+     */
     protected $fieldLink = null;
 
     public function __construct($name, $title = null, $value = "")
     {
         // naming with underscores to prevent values from actually being saved somewhere
-            $this->fieldType =new OptionsetField(
-                "{$name}[Type]",
-                _t('HtmlEditorField.LINKTO', 'Link to'),
-                array(
-                            'Internal' => _t('HtmlEditorField.LINKINTERNAL', 'Page on the site'),
-                            'External' => _t('HtmlEditorField.LINKEXTERNAL', 'Another website'),
-                            //'Anchor' => _t('HtmlEditorField.LINKANCHOR', 'Anchor on this page'),
-                            'Email' => _t('HtmlEditorField.LINKEMAIL', 'Email address'),
-                            'File' => _t('HtmlEditorField.LINKFILE', 'Download a file'),
-                    ),
-                'Internal'
-            );
+        $this->fieldType =new OptionsetField(
+            "{$name}[Type]",
+            _t('HtmlEditorField.LINKTO', 'Link to'),
+            array(
+                        'Internal' => _t('HtmlEditorField.LINKINTERNAL', 'Page on the site'),
+                        'External' => _t('HtmlEditorField.LINKEXTERNAL', 'Another website'),
+                        'Email' => _t('HtmlEditorField.LINKEMAIL', 'Email address'),
+                        'File' => _t('HtmlEditorField.LINKFILE', 'Download a file'),
+                ),
+            'Internal'
+        );
+
         $this->fieldLink = new CompositeField(
             $this->internalField = new WTTreeDropdownField(
                 "{$name}[Internal]",
@@ -114,9 +115,9 @@ class WTLinkField extends TextField
         return $this->internalField->tree($request);
     }
 
-        /**
-         * @return string
-         */
+    /**
+     * @return string
+     */
     public function Field($properties = array())
     {
         Requirements::javascript('dia-nz/link-field:javascript/WTLinkField.js');
@@ -138,15 +139,7 @@ class WTLinkField extends TextField
         }
     }
 
-        /**
-         * 30/06/2009 - Enhancement:
-         * SaveInto checks if set-methods are available and use them
-         * instead of setting the values in the money class directly. saveInto
-         * initiates a new Money class object to pass through the values to the setter
-         * method.
-         *
-         */
-    public function saveInto(\SilverStripe\ORM\DataObjectInterface $dataObject)
+    public function saveInto(DataObjectInterface $dataObject)
     {
         $fieldName = $this->name;
         if ($dataObject->hasMethod("set$fieldName")) {
@@ -190,11 +183,11 @@ class WTLinkField extends TextField
             $this->targetBlankField->setValue($val->getTargetBlank());
         }
 
-            // @todo Format numbers according to current locale, incl.
-            //  decimal and thousands signs, while respecting the stored
-            //  precision in the database without truncating it during display
-            //  and subsequent save operations
+        // @todo Format numbers according to current locale, incl.
+        //  decimal and thousands signs, while respecting the stored
+        //  precision in the database without truncating it during display
+        //  and subsequent save operations
 
-            return $this;
+        return $this;
     }
 }
