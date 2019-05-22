@@ -12,27 +12,11 @@ use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\FieldType\DBComposite;
 use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\Director;
 use SilverStripe\Assets\File;
 
 class WTLink extends DBComposite
 {
-    protected $type;
-
-    protected $internal;
-
-    protected $external;
-
-    protected $email;
-
-    protected $file;
-
-    protected $targetBlank;
-
-    /**
-     * @var float $currencyAmount
-     */
-    protected $link;
-
     /**
      * @var boolean
      */
@@ -79,7 +63,6 @@ class WTLink extends DBComposite
      */
     public function Link()
     {
-        $link = '';
         switch ($this->Type) {
             case 'Internal':
                 if (!$this->Internal) {
@@ -87,32 +70,35 @@ class WTLink extends DBComposite
                 }
 
                 $page = SiteTree::get()->byID($this->Internal);
-                
+
                 if ($page) {
-                    $link = $page->Link();
+                    return $page->Link();
                 }
-
-                break;
             case 'External':
-                $link = $this->dbObject('External')->ATT();
-                break;
+                return $this->dbObject('External')->ATT();
             case 'Email':
-                $link = $this->Email ? 'mailto:' . $this->dbObject('Email')->ATT() : '';
-
-                break;
+                return $this->Email ? 'mailto:' . $this->dbObject('Email')->ATT() : '';
             case 'File':
                 if (!$this->File) {
                     return false;
                 }
-            
+
                 $file = File::get()->byID($this->file);
-               
+
                 if ($file) {
-                    $link = $file->Link();
+                    return $file->Link();
                 }
         }
 
-        return $link;
+        return false;
+    }
+
+    /**
+     * @return string
+     */
+    public function AbsoluteLink()
+    {
+        return Director::absoluteURL($this->Link());
     }
 
     /**
