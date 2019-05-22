@@ -1,0 +1,4 @@
+mappings:
+  WTLink: Dia\SilverStripe\LinkField\WTLink
+  WTLinkField: Dia\SilverStripe\LinkField\WTLinkField
+  WTTreeDropdownField: Dia\SilverStripe\LinkField\TopLevelPage
